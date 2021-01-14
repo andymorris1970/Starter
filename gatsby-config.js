@@ -1,10 +1,65 @@
+require("dotenv").config({
+  path: ".env",
+})
+
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: `Gatsby Starter`,
+    description: `Gatsby Starter Template`,
+    author: `Andy Morris`,
   },
   plugins: [
+    `gatsby-plugin-styled-components`,
+    `gatsby-optional-chaining`,
+    {
+      resolve: `gatsby-plugin-google-fonts`,
+      options: {
+        fonts: [
+          `open sans\:400`,
+          "open sans:400i",
+          `open sans\:700`,
+          "open sans:700i",
+          `open sans\:800`,
+          "open sans:800i",
+        ],
+      },
+    },
+    `gatsby-plugin-catch-links`,
+    {
+      resolve: `gatsby-plugin-styled-components`,
+      options: {
+        displayName: true,
+      },
+    },
+    {
+      resolve: "gatsby-source-shopify2",
+      options: {
+        shopName: process.env.GATSBY_SHOP_NAME,
+        accessToken: process.env.GATSBY_ACCESS_TOKEN,
+        apiVersion: "2020-07",
+      },
+    },
+    {
+      resolve: "gatsby-source-wordpress",
+      options: {
+        minimizeDeprecationNotice: true,
+        baseUrl: process.env.API_URL,
+        protocol: process.env.API_PROTOCOL,
+        hostingWPCOM: false,
+        useACF: true,
+        includedRoutes: [
+          "**/categories",
+          "**/posts",
+          "**/pages",
+          "**/media",
+          "**/tags",
+          "**/taxonomies",
+          // "**/users",
+          "**/menus",
+          "**/portfolio",
+        ],
+      },
+    },
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,
@@ -14,21 +69,20 @@ module.exports = {
       },
     },
     `gatsby-transformer-sharp`,
+    `react-swipeable`,
     `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-default`,
+        name: `SurfStatic Starter`,
         short_name: `starter`,
         start_url: `/`,
         background_color: `#663399`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        icon: `src/images/gatsby-icon.png`,
       },
     },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
+    `gatsby-plugin-netlify`,
   ],
 }
