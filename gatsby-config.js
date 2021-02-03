@@ -7,8 +7,10 @@ module.exports = {
     title: `Gatsby Starter`,
     description: `Gatsby Starter Template`,
     author: `Andy Morris`,
+    // siteUrl: ``, // needed fopr robots-txt
   },
   plugins: [
+    `gatsby-plugin-preload-fonts`,
     `gatsby-plugin-styled-components`,
     `gatsby-optional-chaining`,
     {
@@ -24,6 +26,20 @@ module.exports = {
         ],
       },
     },
+    // {
+    //   resolve: "gatsby-plugin-robots-txt",
+    //   options: {
+    //     host: "",
+    //     sitemap: "",
+    //     policy: [{ userAgent: "*", allow: "/", disallow: "/search" }],
+    //   },
+    // },
+    // {
+    //   resolve: `gatsby-plugin-sitemap`,
+    //   options: {
+    //     exclude: [`/404`],
+    //   },
+    // },
     `gatsby-plugin-catch-links`,
     {
       resolve: `gatsby-plugin-styled-components`,
@@ -71,6 +87,8 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `react-swipeable`,
     `gatsby-plugin-sharp`,
+    `gatsby-plugin-offline`,
+
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
